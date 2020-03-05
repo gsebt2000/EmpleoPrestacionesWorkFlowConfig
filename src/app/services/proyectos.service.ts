@@ -11,8 +11,15 @@ export class ProyectosService {
 
   }
 
-  getPermisosUsuarios(id: string) {
-  //  return this.http.get(`http://localhost:52532/api/menu/${ id }`);
-  return 0;
+  getEstados(id: string) {
+    return this.http.get(`http://localhost:52532/api/CircuitoEstados/${ id }`);
+  
   }
+
+  getTareas(id: string) {
+    return this.http.get(`http://localhost:52532/api/CircuitoTareas/${ id }`);
+  
+  }
+
+
 }
