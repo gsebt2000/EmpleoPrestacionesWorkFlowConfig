@@ -4,6 +4,7 @@ import * as vis from 'vis';
 
 
 
+
 @Component({
   selector: 'app-grafico',
   templateUrl: './grafico.component.html',
@@ -107,11 +108,39 @@ export class GraficoComponent implements OnInit {
                                                   console.log(data3);
                                                   this.container = document.getElementById('mynetwork');
                                                   this.network = new vis.Network(this.container, data3, this.options);
+                                                  
 
                                                   this.network.on("click", function (params) {
+                                                    let NodoActual = JSON.stringify(params.nodes, null, 4);
+                                                    let TareaSeleccionada =params.edges[0];
                                                     params.event = "[original event]";
                                                     document.getElementById('eventSpan').innerHTML = '<h2>Estado:</h2>' + JSON.stringify(params.nodes, null, 4);
-                                                    document.getElementById('eventSpan2').innerHTML = '<h2>Tarea:</h2>' + JSON.stringify(params.edges, null, 4);
+                                                    document.getElementById('eventSpan2').innerHTML = '<h2>Tarea:</h2>' + JSON.stringify(objData.Tareas[0].Validaciones,null,4);
+                                                    var pos = objData.Tareas.indexOf("2.1_2.1");  
+                                                    console.log ('TareaSeleccionada', params.edges[0]);            
+                                                    //objData.Tareas.forEach(element => if (element.CambioEstado = '2.1_2.1') {console.log(element.cambioEstado)}
+
+
+                                                    //objData.Tareas.forEach(element =>  console.log(element.CambioEstado.keys()));
+                                                      
+                                                    
+
+                                                    const found = objData.Tareas.find(element => element.CambioEstado === TareaSeleccionada);
+
+                                                    
+                                                    document.getElementById('eventSpan2').innerHTML = '<h2>Tarea:</h2>' + JSON.stringify(found,null,4);
+                                                    
+                                                    console.log('Tarea:' , found);
+                                                  
+                                                     
+                                                        
+
+
+
+                                                    
+
+
+
                                                 });
 
  
