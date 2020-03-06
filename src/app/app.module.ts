@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import * as $ from 'jquery';
+import * as jQuery from 'jquery';
+
 
 import { AppComponent } from './app.component';
 

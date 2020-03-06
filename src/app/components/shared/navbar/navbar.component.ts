@@ -1,14 +1,35 @@
-import { Component } from '@angular/core';
+
+import { Component, AfterViewInit } from '@angular/core';
+import * as jQuery from 'jquery';
 
 
+declare var $: any;
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styles: []
+  styleUrls: ['./navbar.component.css']
 })
+
+
+
+
+
 export class NavbarComponent {
 
+constructor(){
+
+  $(function() {
+    console.log('inicio');
+    
+      $("#menu-toggle").click(function(e) {
+          e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+            console.log('click toggle');
+            
+          });
   
- 
+        });
 }
+}
+

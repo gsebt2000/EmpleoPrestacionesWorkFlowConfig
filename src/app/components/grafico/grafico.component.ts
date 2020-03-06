@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ProyectosService } from '../../services/proyectos.service';
 import * as vis from 'vis';
+import * as jQuery from 'jquery';
 
-
-
+// para usar jquery
+declare var $: any;
 @Component({
   selector: 'app-grafico',
   templateUrl: './grafico.component.html',
   styleUrls: ['./grafico.component.css']
+
+
 })
 
 
@@ -105,6 +108,35 @@ export class GraficoComponent implements OnInit {
                                                     edges: this.edges
                                                   };
                                                   console.log(data3);
+
+                                                  //creando esquema de grafico
+
+                                                  $("<div>", {
+                                                   class: "row p-0",
+                                                  id:"grafico"})
+                                                    .appendTo("#page-content-wrapper"); 
+
+                                                   
+
+                                                    $("<div>", {
+                                                      id: "mynetwork",
+                                                     class:"col-lg-7 col-sm-12 "})
+                                                      .appendTo("#grafico"); 
+
+
+                                                  $("<div>", {
+                                                      id: "eventSpan",
+                                                    class:"col-lg-2 center-block  col-sm-12 "
+                                                    })
+                                                      .appendTo("#grafico"); 
+
+                                                  $("<div>", {
+                                                        id: "eventSpan2",
+                                                        class:"col-lg-2  col-sm-12 "})
+                                                        .appendTo("#grafico"); 
+  
+                                                      
+
                                                   this.container = document.getElementById('mynetwork');
                                                   this.network = new vis.Network(this.container, data3, this.options);
 
@@ -155,7 +187,7 @@ export class GraficoComponent implements OnInit {
   //var container = document.getElementById('mynetwork');
   
 
-  console.log('Hola');
+
   
  /*   var data = {
     nodes: this.nodes,
@@ -166,7 +198,7 @@ export class GraficoComponent implements OnInit {
 
   }
   ngOnInit() {
-  console.log('Hola');
+
   }
 
 }

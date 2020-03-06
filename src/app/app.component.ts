@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import * as $ from 'jquery';
+import * as jQuery from 'jquery';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+ 
+
   title = 'menu';
 }

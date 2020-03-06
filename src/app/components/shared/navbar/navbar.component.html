@@ -1,99 +1,69 @@
-  
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
+<div class="d-flex" id="wrapper">
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
+    <!-- Sidebar -->
+    <div class=" border-right shadow" id="sidebar-wrapper" style="background-color:#33b5e5;">
 
-    
-    <!-- Custom styles for this template -->
-    <!--<link href="dashboard.css" rel="stylesheet">-->
-  
-      <nav class="navbar navbar-dark fixed-top bg-info flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-sm-3 col-md-6 mr-0" href="#">WIZARD PRESTACIONES</a>
-  <input class="form-control form-control-dark w-50" type="text" placeholder="Search" aria-label="Search">
-  <ul class="navbar-nav px-3">
-  <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">Actores</a>
-    </li>
-    <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">Sign out</a>
-    </li>
-  </ul>
-</nav>
+        <div class="sidebar-heading " style="background-color:#33b5e5;">Inicio </div>
+        <div class="list-group list-group-flush">
+            <a href="#" class="list-group-item list-group-item-action " style="background-color:#33b5e5;">Dashboard</a>
+            <a href="#" class="list-group-item list-group-item-action " style="background-color:#33b5e5;">Shortcuts</a>
+            <a href="#" class="list-group-item list-group-item-action " style="background-color:#33b5e5;">Overview</a>
+            <a href="#" class="list-group-item list-group-item-action " style="background-color:#33b5e5;">Events</a>
+            <a href="#" class="list-group-item list-group-item-action " style="background-color:#33b5e5;">Profile</a>
+            <a href="#" class="list-group-item list-group-item-action " style="background-color:#33b5e5;">Status</a>
+            <a class="nav-link" [routerLink]="['grafico']">Grafico </a>
 
+        </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
 
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
 
-  <div class="row">
-    <nav class="col-md-12 d-none d-md-block bg-success sidebar">
-      <div class="sidebar-sticky">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">
-              <span data-feather="home"></span>
-              Dashboard <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file"></span>
-              Orders
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
-              Nueva Prestación
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="users"></span>
-              Circuito Prestación
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="bar-chart-2"></span>
-              Actores
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="layers"></span>
-              Reglas de Validación 
-            </a>
-          </li>
+        <nav class="navbar navbar-expand-lg navbar-light  border-bottom" style="background-color:#33b5e5;">
+            <button class="btn btn-light" id="menu-toggle">  <span class="navbar-toggler-icon"></span></button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+    </button>
 
-            <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="layers"></span>
-              Conceptos de Liquidación
-            </a>
-          </li>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
 
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                        <!-- <a class="nav-link" [routerLink]="['grafico']">Grafico </a> -->
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
-        </ul>
-      </div>
-    </nav>
+        <div class="container-fluid ">
 
-    
-  </div>
+            <router-outlet></router-outlet>
 
 
 
+        </div>
+        <!-- <dir id="eventSpan">
+        </dir>
+        <dir id="eventSpan2">
+        </dir> -->
+    </div>
+    <!-- /#page-content-wrapper -->
 
-
-       
-
+</div>
+<!-- /#wrapper -->
