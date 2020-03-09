@@ -5,6 +5,12 @@
             Consultar
     </button>
     </div>
-    <app-grilla *ngIf='grilla' [datos]=datos [titulos]=titulos [titulosSaltos]=titulosSaltos [botones]=botones [objService]=[dialog,fs]>
-    </app-grilla>
 </div>
+<div class="row">
+    <app-grilla *ngIf="found" [datos]=found.Actores [titulos]="['Actor','Descripcion']">
+    </app-grilla>
+
+
+</div>
+
+

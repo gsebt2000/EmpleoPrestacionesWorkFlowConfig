@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-//import { NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule} from 'ngx-pagination';
+import {  ModalModule } from 'ngx-bootstrap';
 import * as $ from 'jquery';
 import * as jQuery from 'jquery';
 
@@ -8,6 +9,7 @@ import * as jQuery from 'jquery';
 import { AppComponent } from './app.component';
 
 import {HttpClientModule} from '@angular/common/http';
+
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { AltaComponent } from './components/proyectos/alta/alta.component';
@@ -43,7 +45,8 @@ import { BsModalService } from 'ngx-bootstrap/modal';
   imports: [
     BrowserModule,
     HttpClientModule,
-  
+    NgxPaginationModule,
+    ModalModule.forRoot(),
     APP_ROUTING
   ],
   providers: [  BsModalService,ExcelService,ImpresionService],

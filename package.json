@@ -28,6 +28,7 @@
     "jquery": "^3.4.1",
     "ngx-bootstrap": "^5.5.0",
     "ngx-pagination": "^5.0.0",
+    "ngx-pagination-bootstrap": "^1.6.0",
     "rxjs": "~6.3.3",
     "vis": "^4.21.0-EOL",
     "vis-network": "^7.3.6",
