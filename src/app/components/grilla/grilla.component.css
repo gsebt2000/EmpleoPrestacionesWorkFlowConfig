@@ -1,0 +1,19 @@
+/*componente sin estilos*/
+.table tr th.nivel1{
+    background-color: rgb(52, 199, 29)
+}
+
+.table tr th{
+    font-size: 14px;
+    padding: 0px;
+}
+
+.table tr td{
+    font-size: 12px;
+    padding: 0px;
+}
+
+
+.table tr th.nivel2{
+    background-color: rgb(140, 153, 153)
+}

@@ -27,9 +27,16 @@ export class GraficoComponent implements OnInit {
   DatosGraficosEstados = [];
   DatosGraficosTareas = [];
 
+  //para la grilla
+  public titulos;
+  public titulosSaltos;
+  public datos;
+  public botones;
+  public grilla: boolean;
+  
   
   constructor(private proy: ProyectosService) { 
-     
+     this.grilla = true;
 /*     this.options = {
       layout: {
           randomSeed: 120,
@@ -77,10 +84,10 @@ export class GraficoComponent implements OnInit {
           }
       } 
   }*/
-    this.proy.getEstados('117')
+    this.proy.getEstados('1100')
                       .subscribe( (data: any) => {
 
-                                                this.proy.getTareas('117')
+                                                this.proy.getTareas('1100')
                                                  .subscribe( (data2: any) => {
                                                   const objData = JSON.parse(data2);
                                                   console.log ('Objetos', objData.EtapasResultados);
@@ -160,11 +167,8 @@ export class GraficoComponent implements OnInit {
 
                                                     
                                                     document.getElementById('eventSpan2').innerHTML = '<h2>Tarea:</h2>' + JSON.stringify(found,null,4);
-                                                    
+
                                                     console.log('Tarea:' , found);
-                                                  
-                                                     
-                                                        
 
 
 

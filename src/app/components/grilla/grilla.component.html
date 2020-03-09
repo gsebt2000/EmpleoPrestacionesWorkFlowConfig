@@ -1,0 +1,103 @@
+<div *ngIf="!impService.isPrinting" class="micontenedor">
+
+
+    <div id="tblDatos" class="form-row">
+        <div *ngIf='datos' class="col-12">
+            <ng-container [ngTemplateOutlet]="tabla" [ngTemplateOutletContext]="{nivel:datos,titulos:titulos,botones:botones}">
+            </ng-container>
+        </div>
+
+    </div>
+    <div class="form-row ">
+        <div class="col-10 ">
+            <!--   <pagination-controls (pageChange)="paginaActual = $event" autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Próxima">
+            </pagination-controls>
+-->
+        </div>
+        <div *ngIf="exportaExcell">
+            <button class="btn   btn-block ml-auto" (click)="ExportarExcel()">Excell <i class= "fa fa-file-excel-o"></i> </button>
+        </div>
+        <div *ngIf="imprime">
+            <button class="btn  btn-block ml-auto" (click)="Imprimir()">Imprimir <i class= "fa fa-print"></i> </button>
+        </div>
+
+    </div>
+</div>
+
+<!-- ============= Templates ==================-->
+<!-- Tabla Maestro-->
+<ng-template #tabla let-nivel='nivel' let-titulos='titulos' let-botones='botones'>
+
+    <div *ngIf="titulos.length >0" class="table-responsive">
+        <table class="table table-md table-hover">
+            <thead>
+
+                <tr *ngIf="nivel" class="table-light ">
+                    <th *ngIf="botones"> </th>
+                    <!--        <th>  </th>   -->
+                    <Th *ngFor="let titulo of titulos ; let i = index">{{titulo}}</Th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <!-- 
+                <ng-container  *ngFor="let elemento of nivel | paginate: { itemsPerPage: 10, currentPage: paginaActual }"
+
+-->
+                <ng-container *ngFor="let elemento of nivel " [ngTemplateOutlet]="item" [ngTemplateOutletContext]="{elemento:elemento, campos:titulos,subnivel: [], titulos: titulos, botones:botones}">
+                </ng-container>
+
+            </tbody>
+        </table>
+
+    </div>
+
+</ng-template>
+
+<!-- Tabla Detalle-->
+<ng-template #item let-elemento='elemento' let-campos='campos' let-subnivel='subnivel' let-titulos='titulos' let-botones='botones'>
+    <tr>
+        <!--         <td > 
+            <a class="btn" *ngIf="subnivel" (click)="setDetalle(elemento,subnivel) "> 
+            <i class="fa fa-chevron-down" *ngIf="!elemento.detalle"></i> 
+            <i class="fa fa-chevron-up" *ngIf="elemento.detalle"></i>
+            </a>
+        </td> -->
+        <td *ngIf="botones" style="width:10%">
+            <div class="btn-group btn-group-xs" role="group">
+                <a *ngFor="let boton of botones; let x = index " class="btn " data-toggle="tooltip" title="{{boton.text}}" (click)="boton.hacer(impService,objService[x],elemento)"> <i class="{{boton.imagen}}"></i> </a>
+            </div>
+        </td>
+
+        <td *ngFor="let campo of campos; let x = index ">
+            <div> {{elemento[campo]}} </div>
+        </td>
+    </tr>
+
+    <tr *ngIf="elemento.detalle">
+        <td [attr.colspan]="campos.length+1">
+            <ng-container [ngTemplateOutlet]="tabla" [ngTemplateOutletContext]={nivel:subnivel}>
+            </ng-container>
+        </td>
+    </tr>
+</ng-template>
+
+<ng-template #detTempalte role="dialog">
+    <div *ngIf='detalleMostrar.datos.length > 0'>
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--  <h5> {{ modalService.config.initialState.titulo }}</h5>-->
+                <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarDetalle()">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class=" table-responsive ">
+                    <ng-container [ngTemplateOutlet]="tabla" [ngTemplateOutletContext]="{nivel:detalleMostrar.datos,titulos:detalleMostrar.titulosGlobales}">
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ng-template>
