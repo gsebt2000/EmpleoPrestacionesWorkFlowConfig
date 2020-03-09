@@ -37,7 +37,7 @@ export class GrillaComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    alert('puto');
+   // alert('puto');
   }
 
   getTitulosNivel(nivel, titulos?) {
