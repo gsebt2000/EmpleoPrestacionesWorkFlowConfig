@@ -8,27 +8,38 @@
     </div>
 
 </div>
-<div *ngIf="buscarPrograma.value !=''" class="row">
 
-    <div id="mynetwork" class=" col-lg-7 col-sm-12"></div>
-    <div id="eventSpan" class=" col-lg-2 center-block col-sm-12  ">
+
+
+
+<!-- <div *ngIf="buscarPrograma.value !=''" class="row"> -->
+<div class="row">
+    <div id="mynetwork" class=" col-lg-5 col-sm-12"></div>
+    <!-- <div id="eventSpan" class="grafico col-lg-1 center-block col-sm-12  ">
     </div>
-    <div id="eventSpan2" class="col-lg-2 col-sm-12 ">
+    <div id="eventSpan2" class=" grafico col-lg-1 col-sm-12 ">
+    </div> -->
+
+    <div class="grafico col-lg-2 col-sm-12 ">
+        <h1>Actores</h1>
+        <app-grilla *ngIf="found" [datos]=found.Actores [titulos]="['Actor','Descripcion']">
+        </app-grilla>
+
+
     </div>
+
+    <div class="grafico col-lg-2 col-sm-12 ">
+        <h1>Tareas</h1>
+        <app-grilla *ngIf="found" [datos]=found.CambioEstado [titulos]="['CambioEstado','Descripcion']">
+        </app-grilla>
+
+
+    </div>
+
+
 </div>
-<div *ngIf="buscarPrograma.value ==''" class="row">
+<!-- <div *ngIf="buscarPrograma.value ==''" class="row">
     <div class="col col-12 m-5">
         <h1>Debe seleccionar un programa</h1>
     </div>
-</div>
-
-
-<div class="row">
-    <app-grilla *ngIf='grilla' [datos]=datos [titulos]=titulos [titulosSaltos]=titulosSaltos [botones]=botones [objService]=[dialog,fs]> </app-grilla>
-</div>
-<div class="row">
-    <app-grilla *ngIf="found" [datos]=found.Actores [titulos]="['Actor','Descripcion']">
-    </app-grilla>
-
-
-</div>
+</div> -->

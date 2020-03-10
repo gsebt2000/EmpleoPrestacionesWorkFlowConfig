@@ -7,23 +7,23 @@
     /*background-color:black;*/
 }
 
+.grafico {
+    padding-top: 30px;
+    margin-top: 50px;
+    margin-left: 20px;
+}
+
 #eventSpan {
     color: #0099CC;
-    float: left;
-    position: relative;
-    padding-top: 30px;
-    margin-left: 20px;
-    margin-top: 50px;
+    /* float: left; */
+    /* position: relative; */
 }
 
 #eventSpan2 {
     color: rgba(0, 150, 136, 0.7);
-    margin-left: 20px;
-    margin-top: 50px;
     width: 100%;
     align-content: right;
-    padding-top: 30px;
-    position: relative;
-    float: right;
+    /* position: relative;
+    float: right; */
     /* border: 1px solid blue; */
 }

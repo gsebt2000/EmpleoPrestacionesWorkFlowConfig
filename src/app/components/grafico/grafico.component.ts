@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { ProyectosService } from '../../services/proyectos.service';
 import * as vis from 'vis';
@@ -35,8 +36,8 @@ export class GraficoComponent implements OnInit {
   public botones;
   public grilla: boolean;
   public xx:any;
-  programa: string = "";
-  
+  programa:string;
+
   constructor(private proy: ProyectosService) { 
      this.grilla = true;
      this.titulos = ['CambioEstado','Descripcion'];
@@ -47,13 +48,22 @@ export class GraficoComponent implements OnInit {
 
 
   }
- 
+  ngOnInit() {
+
+  }
+
+  
   obtenerPrograma(programaabuscar: string){
     //  let programaInput = $('#programaInput').val();
     if (programaabuscar != "") {
       
       this.programa = programaabuscar;
-    }
+   }
+   console.log( 'programa seleccionado',this.programa);
+   
+  return this.programa;
+   
+
   }
 
   grafica(data){
@@ -87,20 +97,25 @@ export class GraficoComponent implements OnInit {
     };
     console.log(data3);
 
+    
 
     this.container = document.getElementById('mynetwork');
     this.network = new vis.Network(this.container, data3, this.options);
 
-  }
-  ngOnInit() {
+
+    this.network.on("click", (params:any) => this.muestraTareas (params,objData) );
+
+
+
+
 }
 
 muestraTareas(params,objData){
   let NodoActual = JSON.stringify(params.nodes, null, 4);
   let TareaSeleccionada =params.edges[0];
   params.event = "[original event]";
-  document.getElementById('eventSpan').innerHTML = '<h2>Estado:</h2>' + JSON.stringify(params.nodes, null, 4);
-  document.getElementById('eventSpan2').innerHTML = '<h2>Tarea:</h2>' + JSON.stringify(objData.Tareas[0].Validaciones,null,4);
+  // document.getElementById('eventSpan').innerHTML = '<h2>Estado:</h2>' + JSON.stringify(params.nodes, null, 4);
+  // document.getElementById('eventSpan2').innerHTML = '<h2>Tarea:</h2>' + JSON.stringify(objData.Tareas[0].Validaciones,null,4);
   var pos = objData.Tareas.indexOf("2.1_2.1");  
   console.log ('TareaSeleccionada', params.edges[0]);            
   //objData.Tareas.forEach(element => if (element.CambioEstado = '2.1_2.1') {console.log(element.cambioEstado)}
@@ -113,7 +128,7 @@ muestraTareas(params,objData){
     this.found = objData.Tareas.find(element => element.CambioEstado === TareaSeleccionada);
 
   this.datos.push({CambioEstado:"dfasdfasf",descripcion:"fdsda"},{CambioEstado:"dfasdfasf",descripcion:"fdsda"});
-  document.getElementById('eventSpan2').innerHTML = '<h2>Tarea:</h2>' + JSON.stringify(this.found,null,4);
+  // document.getElementById('eventSpan2').innerHTML = '<h2>Tarea:</h2>' + JSON.stringify(this.found,null,4);
 
   console.log('Tarea:' , this.found);
 
