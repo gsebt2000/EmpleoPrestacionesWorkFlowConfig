@@ -35,6 +35,7 @@ export class GraficoComponent implements OnInit {
   public botones;
   public grilla: boolean;
   public xx:any;
+  programa: string = "";
   
   constructor(private proy: ProyectosService) { 
      this.grilla = true;
@@ -46,8 +47,13 @@ export class GraficoComponent implements OnInit {
 
 
   }
-  ngOnInit() {
-
+ 
+  obtenerPrograma(programaabuscar: string){
+    //  let programaInput = $('#programaInput').val();
+    if (programaabuscar != "") {
+      
+      this.programa = programaabuscar;
+    }
   }
 
   grafica(data){
@@ -81,48 +87,12 @@ export class GraficoComponent implements OnInit {
     };
     console.log(data3);
 
-    //creando esquema de grafico
-
-
-    $("<div>", {
-      class: "row p-0",
-    id:"grafico"})
-      .appendTo("#page-content-wrapper"); 
-
-      
-
-      $("<div>", {
-        id: "mynetwork",
-        class:"col-lg-7 col-sm-12 "})
-        .appendTo("#grafico"); 
-
-
-    $("<div>", {
-        id: "eventSpan",
-      class:"col-lg-2 center-block  col-sm-12 "
-      })
-        .appendTo("#grafico"); 
-
-    $("<div>", {
-          id: "eventSpan2",
-          class:"col-lg-2  col-sm-12 "})
-          .appendTo("#grafico"); 
 
     this.container = document.getElementById('mynetwork');
     this.network = new vis.Network(this.container, data3, this.options);
 
   }
   ngOnInit() {
-
-    this.network.on("click", (params:any) => this.muestraTareas (params,objData) );
-
-
-
-    //  alert ( programaabuscar + ' progrma '+ this.programa);
-      return;
-    
-     
-
 }
 
 muestraTareas(params,objData){
