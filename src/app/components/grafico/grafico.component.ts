@@ -34,6 +34,9 @@ export class GraficoComponent implements OnInit {
   public botones;
   public grilla: boolean;
   
+  // Programa
+   programa: string = "";
+
   
   constructor(private proy: ProyectosService) { 
      this.grilla = true;
@@ -84,6 +87,8 @@ export class GraficoComponent implements OnInit {
           }
       } 
   }*/
+
+    
     this.proy.getEstados('1100')
                       .subscribe( (data: any) => {
 
@@ -116,33 +121,7 @@ export class GraficoComponent implements OnInit {
                                                   };
                                                   console.log(data3);
 
-                                                  //creando esquema de grafico
-
-                                                  $("<div>", {
-                                                   class: "row p-0",
-                                                  id:"grafico"})
-                                                    .appendTo("#page-content-wrapper"); 
-
-                                                   
-
-                                                    $("<div>", {
-                                                      id: "mynetwork",
-                                                     class:"col-lg-7 col-sm-12 "})
-                                                      .appendTo("#grafico"); 
-
-
-                                                  $("<div>", {
-                                                      id: "eventSpan",
-                                                    class:"col-lg-2 center-block  col-sm-12 "
-                                                    })
-                                                      .appendTo("#grafico"); 
-
-                                                  $("<div>", {
-                                                        id: "eventSpan2",
-                                                        class:"col-lg-2  col-sm-12 "})
-                                                        .appendTo("#grafico"); 
-  
-                                                      
+        
 
                                                   this.container = document.getElementById('mynetwork');
                                                   this.network = new vis.Network(this.container, data3, this.options);
@@ -186,50 +165,25 @@ export class GraficoComponent implements OnInit {
                     });
     
     
-                          
-    
-// create an array with nodes
-
-
-
-
-
-/*   var nodes = new vis.DataSet([
-    {id: 1, label: 'Node 1'}, 
-    {id: 2, label: 'Node 2'},
-    {id: 3, label: 'Node 3'},
-    {id: 4, label: 'Node 4'},
-    {id: 5, label: 'Node 5'}
-  ]); */
-
-  //console.log('Nodes' + nodes);
-
-  //var edges = new vis.DataSet(this.tareas);
- 
-  // create an array with edges
-   /* var edges = new vis.DataSet([
-    {from: 1, to: 3},
-    {from: 1, to: 2},
-    {from: 2, to: 4},
-    {from: 2, to: 5},
-    {from: 3, to: 3}
-  ]);  */
- 
-  // create a network
-  //var container = document.getElementById('mynetwork');
-  
-
-
-  
- /*   var data = {
-    nodes: this.nodes,
-    edges: edges
-  };  */
-  //var options = {};
- 
 
   }
   ngOnInit() {
+
+  }
+
+  obtenerPrograma(programaabuscar: string){
+    //  let programaInput = $('#programaInput').val();
+    if (programaabuscar != "") {
+      
+      this.programa = programaabuscar;
+    }
+
+
+    //  alert ( programaabuscar + ' progrma '+ this.programa);
+      return;
+    
+     
+
 
   }
 

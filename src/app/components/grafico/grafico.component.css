@@ -1,8 +1,29 @@
 #mynetwork {
     width: 100%;
-    height: 100%;
-    margin-left: 0px;
-    margin-top: 90px;
-    border: 1px solid blue;
+    height: 700px;
+    margin-left: 20px;
+    margin-top: 50px;
+    /* border: 1px solid blue; */
     /*background-color:black;*/
+}
+
+#eventSpan {
+    color: #0099CC;
+    float: left;
+    position: relative;
+    padding-top: 30px;
+    margin-left: 20px;
+    margin-top: 50px;
+}
+
+#eventSpan2 {
+    color: rgba(0, 150, 136, 0.7);
+    margin-left: 20px;
+    margin-top: 50px;
+    width: 100%;
+    align-content: right;
+    padding-top: 30px;
+    position: relative;
+    float: right;
+    /* border: 1px solid blue; */
 }
