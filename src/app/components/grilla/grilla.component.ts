@@ -31,9 +31,14 @@ export class GrillaComponent implements OnInit, OnChanges {
   ngOnInit() {
     if (this.exportaExcell === undefined) { this.exportaExcell = true}
     if (this.imprime === undefined) { this.imprime = true}
+    if (this.titulos === undefined) {
+      this.titulos = Object.keys(this.datos[0]);
+    }
   }
 
-  ngOnChanges(changes: SimpleChanges) {}
+  ngOnChanges(changes: SimpleChanges) {
+   // alert('puto');
+  }
 
   getTitulosNivel(nivel, titulos?) {
     if (!titulos) {titulos = this.titulos; }

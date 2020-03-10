@@ -10,9 +10,9 @@
     </div>
     <div class="form-row ">
         <div class="col-10 ">
-            <!--   <pagination-controls (pageChange)="paginaActual = $event" autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Próxima">
+             <pagination-controls (pageChange)="paginaActual = $event" autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Próxima">
             </pagination-controls>
--->
+
         </div>
         <div *ngIf="exportaExcell">
             <button class="btn   btn-block ml-auto" (click)="ExportarExcel()">Excell <i class= "fa fa-file-excel-o"></i> </button>
@@ -40,10 +40,10 @@
             </thead>
 
             <tbody>
-                <!-- 
-                <ng-container  *ngFor="let elemento of nivel | paginate: { itemsPerPage: 10, currentPage: paginaActual }"
+               
+                <ng-container  *ngFor="let elemento of nivel | paginate: { itemsPerPage: 10, currentPage: paginaActual }"></ng-container>
 
--->
+
                 <ng-container *ngFor="let elemento of nivel " [ngTemplateOutlet]="item" [ngTemplateOutletContext]="{elemento:elemento, campos:titulos,subnivel: [], titulos: titulos, botones:botones}">
                 </ng-container>
 
