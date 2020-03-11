@@ -14,31 +14,60 @@
 
 <!-- <div *ngIf="buscarPrograma.value !=''" class="row"> -->
 <div class="row">
-    <div id="mynetwork" class=" col-lg-5 col-sm-12"></div>
+    <div id="mynetwork" class="col-lg-5 col-sm-12 borde-img"></div>
     <!-- <div id="eventSpan" class="grafico col-lg-1 center-block col-sm-12  ">
     </div>
     <div id="eventSpan2" class=" grafico col-lg-1 col-sm-12 ">
     </div> -->
 
-    <div class="grafico col-lg-2 col-sm-12 ">
+    <div class="grafico col-lg-3 col-sm-12 borde-img">
         <h1>Actores</h1>
-        <app-grilla *ngIf="found" [datos]=found.Actores [titulos]="['Actor','Descripcion']">
+        <app-grilla [datos]=found.Actores [titulos]="['Actor','Descripcion']">
         </app-grilla>
 
 
-    </div>
+        <div class="col-lg-12 col-sm-12">
+            <div class="card">
+                <img src="" class="card-img-bottom" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Datos de la tarea Seleccionada</h5>
+                    <p class="card-text"></p>
+                    <span>Tarea: </span>
+                    <span class="badge badge-pill badge-success">{{found.CambioEstado}}</span> <br>
+                    <span>Descripcion: </span>
+                    <span class="badge badge-pill badge-success">{{found.Descripcion}}</span> <br>
+                    <span>Etapa: </span>
+                    <span class="badge badge-pill badge-success">{{found.Etapa}}</span> <br>
+                    <span>Resultado: </span>
+                    <span class="badge badge-pill badge-success">{{found.Resultado}}</span> <br>
+                    <span>Prox Etapa: </span>
+                    <span class="badge badge-pill badge-success">{{found.ProxEtapa}}</span> <br>
+                    <span>Prox Resultado: </span>
+                    <span class="badge badge-pill badge-success">{{found.ProxResultado}}</span> <br>
+                </div>
+            </div>
+            <div class="col-lg-12 col-sm-12 mt-2">
 
-    <div class="grafico col-lg-2 col-sm-12 ">
-        <h1>Tareas</h1>
-        <app-grilla *ngIf="found" [datos]=found.CambioEstado [titulos]="['CambioEstado','Descripcion']">
+                <h1>Usuarios</h1>
+                <hr>
+                <app-grilla [datos]=found.Actores[0].Usuarios [titulos]="['UserName','Apellido']">
+                </app-grilla>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+    <div class="grafico col-lg-3 col-sm-12 borde-img ">
+        <h1>Validaciones</h1>
+        <app-grilla [datos]=found.Validaciones [titulos]="['OpcionValidacion','Descripcion','Orden']">
         </app-grilla>
-
-
     </div>
 
 
-</div>
-<!-- <div *ngIf="buscarPrograma.value ==''" class="row">
+    <!-- <div *ngIf="buscarPrograma.value ==''" class="row">
     <div class="col col-12 m-5">
         <h1>Debe seleccionar un programa</h1>
     </div>

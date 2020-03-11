@@ -10,7 +10,7 @@
     </div>
     <div class="form-row ">
         <div class="col-10 ">
-             <pagination-controls (pageChange)="paginaActual = $event" autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Próxima">
+            <pagination-controls (pageChange)="paginaActual = $event" autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Próxima">
             </pagination-controls>
 
         </div>
@@ -40,8 +40,8 @@
             </thead>
 
             <tbody>
-               
-                <ng-container  *ngFor="let elemento of nivel | paginate: { itemsPerPage: 10, currentPage: paginaActual }"></ng-container>
+
+                <ng-container *ngFor="let elemento of nivel | paginate: { itemsPerPage: 10, currentPage: paginaActual }"></ng-container>
 
 
                 <ng-container *ngFor="let elemento of nivel " [ngTemplateOutlet]="item" [ngTemplateOutletContext]="{elemento:elemento, campos:titulos,subnivel: [], titulos: titulos, botones:botones}">
