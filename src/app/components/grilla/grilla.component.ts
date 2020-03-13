@@ -3,7 +3,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import {ExcelService} from './../../services/excel.service';
 import {ImpresionService} from './../../services/impresion.service';
-
+import {getTitulos,makeid,filtraColumnas} from './funciones';
 // import {getTitulos, getColumnasSaltos} from './../../_funciones/funciones';
 @Component({
   selector: 'app-grilla',
@@ -22,29 +22,37 @@ export class GrillaComponent implements OnInit, OnChanges {
 
   private modalRef: BsModalRef;
   paginaActual: number;
+  public pruebaArr:any;
   public detalleMostrar = {datos: [], titulos: [], titulosGlobales: []};
-
+  public tablaId: string;
+  public p: number[] = [];
   constructor( private excelService: ExcelService,
                public impService: ImpresionService,
-               public modalService: BsModalService) { }
+               public modalService: BsModalService) {
+                this.tablaId = makeid(5);
+                
+                }
 
   ngOnInit() {
     if (this.exportaExcell === undefined) { this.exportaExcell = true}
     if (this.imprime === undefined) { this.imprime = true}
-    if (this.titulos === undefined) {
-      this.titulos = Object.keys(this.datos[0]);
-    }
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
-   // alert('puto');
+
   }
 
-  getTitulosNivel(nivel, titulos?) {
-    if (!titulos) {titulos = this.titulos; }
 
-    nivel.titulos = this.getTitulos(nivel[0], titulos, this.titulosSaltos);
-    return nivel.titulos.length > 0;
+  getTitulosNivel(nivel, titulos?) {
+    nivel.titulos= [];
+    nivel.titulos.titulos= [];
+    if (nivel.length> 0){
+      if (!titulos) {titulos = Object.keys(nivel[0]); }
+
+      nivel.titulos = getTitulos(nivel[0], titulos, []);
+    }
+    return nivel.titulos.titulos.length > 0;
   }
 
   clickEvent(funcion ){
@@ -59,25 +67,14 @@ export class GrillaComponent implements OnInit, OnChanges {
 
       return [];
   }
-  setNivel2(elemento: any) {
-        const xTit = this.getColumnasSaltos(this.titulosSaltos);
 
-       if (!elemento.subnivel) {
-        const subnivel = Object.entries(elemento).filter(function(x) {
-          return (xTit.indexOf( x[0]) === -1) &&  Array.isArray(x[1]);
-         });
-         if (subnivel.length > 0) {
-            elemento.subnivel = subnivel[0][1];
-           for (let i = 0; i >  elemento.subnivel.length; i++) {  elemento.subnivel.detalle = true; }
-         }
-      }
-    return elemento.subnivel;
-  }
   setDetalle(elemento: any, subnivel: any) {
     elemento.detalle = !elemento.detalle;
   }
-    mostrarDetalle(elemento: any, detalle: any, xTitulo: string, template: TemplateRef<any>) {
+    mostrarDetalle(elemento: any, campo: any, xTitulo: string, template: TemplateRef<any>) {
       const initialState = {titulo: xTitulo};
+      this.detalleMostrar.datos = elemento[campo];
+      this.detalleMostrar.titulosGlobales = Object.keys(elemento[campo][0]);
       this.modalRef = this.modalService.show( template, Object.assign({}, { class: 'modal-dialog modal-lg', initialState })); 
 
     }
@@ -85,13 +82,30 @@ export class GrillaComponent implements OnInit, OnChanges {
       this.detalleMostrar = {datos: [], titulos: [], titulosGlobales: []};
       this.modalRef.hide();
     }
+
+    muestraModal(elemento: any, detalle: any, titulo: any){
+      let muestra = false;
+      if (detalle ){
+        if (detalle.length > 0){
+          muestra = elemento[detalle[0].Lista].length > 0;
+        }
+
+      }
+      return muestra;
+    }
+    isArray(campo:any, elemento:any){
+      let result = 0;
+      if (Array.isArray(elemento[campo])){result = elemento[campo].length;}
+      return  result;
+    }
   Imprimir(): void {
     this.getTitulosNivel(this.datos);
     this.impService.encabezado = 'Pedido';
     this.impService.printDocument('impresionGrilla', JSON.stringify({datos: this.datos, titulos: this.datos.titulos}));
   }
 
-  ExportarExcel(): void {
-    this.excelService.exportAsExcelFile(this.datos, 'Legajo Resumen');
+  ExportarExcel(datos, titulos, titulo): void {
+    titulo = titulo === undefined ? 'Datos' : titulo;
+    this.excelService.exportAsExcelFile(filtraColumnas(datos, titulos), titulos);
   }
 }

@@ -17,3 +17,19 @@
 .table tr th.nivel2{
     background-color: rgb(140, 153, 153)
 }
+
+
+.sinpadding {
+    margin-left: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  
+  .my-pagination /deep/ .ngx-pagination .current {
+    background: #6c757d;
+  }
+  
+  .pagination-x /deep/ .ngx-pagination {
+    padding-left: 0px;
+  }
+  

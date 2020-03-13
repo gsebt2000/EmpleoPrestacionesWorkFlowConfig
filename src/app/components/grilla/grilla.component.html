@@ -3,59 +3,69 @@
 
     <div id="tblDatos" class="form-row">
         <div *ngIf='datos' class="col-12">
-            <ng-container [ngTemplateOutlet]="tabla" [ngTemplateOutletContext]="{nivel:datos,titulos:titulos,botones:botones}">
+            <ng-container 
+            [ngTemplateOutlet]="tabla" 
+            [ngTemplateOutletContext]="{nivel:datos,titulos:titulos,botones:botones,indice:0}">
             </ng-container>
         </div>
 
     </div>
-    <div class="form-row ">
-        <div class="col-10 ">
-            <pagination-controls (pageChange)="paginaActual = $event" autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Próxima">
-            </pagination-controls>
-
-        </div>
-        <div *ngIf="exportaExcell">
-            <button class="btn   btn-block ml-auto" (click)="ExportarExcel()">Excell <i class= "fa fa-file-excel-o"></i> </button>
-        </div>
-        <div *ngIf="imprime">
-            <button class="btn  btn-block ml-auto" (click)="Imprimir()">Imprimir <i class= "fa fa-print"></i> </button>
-        </div>
-
-    </div>
+    
 </div>
 
 <!-- ============= Templates ==================-->
 <!-- Tabla Maestro-->
-<ng-template #tabla let-nivel='nivel' let-titulos='titulos' let-botones='botones'>
+<ng-template #tabla let-nivel='nivel' let-titulos='titulos' let-botones='botones' let-indice='indice'>
 
-    <div *ngIf="titulos.length >0" class="table-responsive">
-        <table class="table table-md table-hover">
+    <div class="row " *ngIf="nivel && getTitulosNivel(nivel,titulos) > 0" id="'tblDatos-'+tableId">
+        <table *ngIf="nivel"  class="table table-md table-hover">
+
             <thead>
-
-                <tr *ngIf="nivel" class="table-light ">
+                <tr >
                     <th *ngIf="botones"> </th>
-                    <!--        <th>  </th>   -->
-                    <Th *ngFor="let titulo of titulos ; let i = index">{{titulo}}</Th>
+                    <Th *ngFor="let titulo of nivel.titulos.titulos ">{{titulo}}</Th>
                 </tr>
-            </thead>
-
+            </thead >
             <tbody>
 
-                <ng-container *ngFor="let elemento of nivel | paginate: { itemsPerPage: 10, currentPage: paginaActual }"></ng-container>
-
-
-                <ng-container *ngFor="let elemento of nivel " [ngTemplateOutlet]="item" [ngTemplateOutletContext]="{elemento:elemento, campos:titulos,subnivel: [], titulos: titulos, botones:botones}">
+                <ng-container *ngFor="let elemento of nivel| paginate: { itemsPerPage: 10, currentPage: p[indice], id:'xx-'+tablaId+indice }; let i = index"
+                    [ngTemplateOutlet]="item" 
+                     [ngTemplateOutletContext]="{elemento:elemento, campos:nivel.titulos.titulos,subnivel:[], titulos: nivel.titulos.titulos, botones:botones, inidice:indice+i}">
                 </ng-container>
 
             </tbody>
         </table>
 
     </div>
+    <div *ngIf="nivel" class="row ">  
 
+        <!-- control de paginacion -->
+        <div class="col col-md-10">
+            <pagination-controls class="my-pagination pagination-x " (pageChange)= "p[indice]= $event" 
+                                id=xx-{{tablaId}}{{indice}}
+                                autoHide="true"
+                                responsive="true"
+                                previousLabel="Anterior"
+                                nextLabel="Próxima"
+                                >
+            </pagination-controls>
+
+        </div>
+        <div class="col col-md-2 ">
+                        <div class="btn-group" >
+                            <button type="button"  class="btn btn-secondary btn-small" (click)="ExportarExcel(nivel,nivel.titulos.titulos,titulo)"><i class="fa fa-file-excel-o"></i> </button>
+                         <!--   <button type="button" class="btn btn-secondary btn-small" (click)="Imprimir(nivel)"> <i class="fa fa-print"></i> </button>-->
+                        </div> 
+        </div>
+
+ 
+
+    </div>
 </ng-template>
 
 <!-- Tabla Detalle-->
 <ng-template #item let-elemento='elemento' let-campos='campos' let-subnivel='subnivel' let-titulos='titulos' let-botones='botones'>
+
     <tr>
         <!--         <td > 
             <a class="btn" *ngIf="subnivel" (click)="setDetalle(elemento,subnivel) "> 
@@ -65,12 +75,23 @@
         </td> -->
         <td *ngIf="botones" style="width:10%">
             <div class="btn-group btn-group-xs" role="group">
-                <a *ngFor="let boton of botones; let x = index " class="btn " data-toggle="tooltip" title="{{boton.text}}" (click)="boton.hacer(impService,objService[x],elemento)"> <i class="{{boton.imagen}}"></i> </a>
+                <a *ngFor="let boton of botones; let x = index " class="btn " 
+                data-toggle="tooltip" title="{{boton.text}}" 
+                (click)="boton.hacer(impService,objService[x],elemento)"> 
+                    <i class="{{boton.imagen}}"></i> 
+                </a>
             </div>
         </td>
+       
+        <td *ngFor="let campo of campos;  trackBy: indexTracker" >        
+            <div  *ngIf="isArray(campo,elemento) == 0"  >    {{elemento[campo]}}  </div>
+            <div *ngIf="isArray(campo,elemento) >0" >   
+                <a> {{elemento[campo].length}} </a>
+                <a   (click)="mostrarDetalle(elemento,campo, campo, detTempalte)">   
+                        <i class="fa fa-search" ></i> 
+                </a>
 
-        <td *ngFor="let campo of campos; let x = index ">
-            <div> {{elemento[campo]}} </div>
+            </div> 
         </td>
     </tr>
 
@@ -82,22 +103,24 @@
     </tr>
 </ng-template>
 
+
 <ng-template #detTempalte role="dialog">
     <div *ngIf='detalleMostrar.datos.length > 0'>
-        <div class="modal-content">
+        <div >
             <div class="modal-header">
-                <!--  <h5> {{ modalService.config.initialState.titulo }}</h5>-->
+                  <h5> {{ modalService.config.initialState.titulo }} </h5>
                 <button type="button" class="close pull-right" aria-label="Close" (click)="cerrarDetalle()">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class=" table-responsive ">
-                    <ng-container [ngTemplateOutlet]="tabla" [ngTemplateOutletContext]="{nivel:detalleMostrar.datos,titulos:detalleMostrar.titulosGlobales}">
+                    <ng-container 
+                        [ngTemplateOutlet]="tabla" 
+                        [ngTemplateOutletContext]="{nivel:detalleMostrar.datos,titulos:detalleMostrar.titulosGlobales,indice:2}">
                     </ng-container>
-                </div>
             </div>
         </div>
     </div>
 
 </ng-template>
+

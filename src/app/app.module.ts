@@ -2,10 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgxPaginationModule} from 'ngx-pagination';
 import {  ModalModule } from 'ngx-bootstrap';
-import * as $ from 'jquery';
-import * as jQuery from 'jquery';
-
-
 import { AppComponent } from './app.component';
 
 import {HttpClientModule} from '@angular/common/http';
